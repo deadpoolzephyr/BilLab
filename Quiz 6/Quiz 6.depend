@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1589379812 source:d:\arda\okul\study\quiz 6\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

@@ -1,0 +1,76 @@
+//170202037 Arda Talu
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct kimlik{
+    char isim[50];
+    int yas;
+};
+
+int main()
+{
+    int n,i,j,eki,enbuyukyas;
+    char ek[100];
+    printf("Kisi sayisini giriniz:\n");
+    scanf("%d",&n);
+    struct kimlik* Kisi=(struct kimlik*)malloc(n*sizeof(struct kimlik));
+    for(i=0; i<n; i++){
+        printf("%d. kisinin adini giriniz: ",i+1);
+        fflush(stdin);
+        fgets(Kisi[i].isim,100,stdin);
+        fflush(stdin);
+        Kisi[i].isim[strlen(Kisi[i].isim)-1]='\0';
+        printf("%d. kisinin yasi: ",i+1);
+        scanf("%d",&Kisi[i].yas);
+    }
+    int yazildimi[n];
+    for(i=0; i<n; i++){
+        yazildimi[i]=0;
+    }
+    printf("\nIsme gore siralama:\n");
+    for(i=0; i<n; i++){
+        strcpy(ek,"\n\n");
+        for(j=0; j<n; j++){
+            if(yazildimi[j]==0){
+                if(!strcmp(ek,"\n\n")){
+                    strcpy(ek,Kisi[j].isim);
+                    eki=j;
+                }
+                else{
+                    if(strcmp(Kisi[j].isim,ek)<0){
+                        strcpy(ek,Kisi[j].isim);
+                    eki=j;
+                    }
+                }
+            }
+        }
+        printf("%s %d\n",ek,Kisi[eki].yas);
+        yazildimi[eki]=1;
+    }
+    for(i=0; i<n; i++){
+        yazildimi[i]=0;
+    }
+    printf("\nYasa gore siralama:\n");
+    for(i=0; i<n; i++){
+        enbuyukyas=-1;
+        for(j=0; j<n; j++){
+            if(yazildimi[j]==0){
+                if(enbuyukyas==-1){
+                    enbuyukyas=Kisi[j].yas;
+                    eki=j;
+                }
+                else{
+                    if(enbuyukyas<Kisi[j].yas){
+                        enbuyukyas=Kisi[j].yas;
+                    eki=j;
+                    }
+                }
+            }
+        }
+        printf("%s %d\n",Kisi[eki].isim,Kisi[eki].yas);
+        yazildimi[eki]=1;
+    }
+    free(Kisi);
+    return 0;
+}

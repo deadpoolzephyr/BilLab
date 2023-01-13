@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1589744557 source:d:\arda\okul\study\hesap_makinesi\main.c
+	<stdio.h>
+	<stdlib.h>
+

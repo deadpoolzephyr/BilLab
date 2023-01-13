@@ -1,0 +1,69 @@
+//170202037 Arda Talu
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct kimlik{
+
+    char isim[50];
+    int gun;
+    int ay;
+    int yil;
+
+};
+
+int kucuguBul(struct kimlik Kisi[],int n){
+
+    int kucuk = 0;
+    for(int i=0; i<n; i++){
+    if (Kisi[i].yil > Kisi[kucuk].yil){
+        kucuk = i;
+    }
+    else if (Kisi[i].yil == Kisi[kucuk].yil){
+        if(Kisi[i].ay > Kisi[kucuk].ay){
+            kucuk = i;
+        }
+        else if(Kisi[i].ay == Kisi[kucuk].ay){
+            if(Kisi[i].gun > Kisi[kucuk].gun){
+                kucuk = i;
+                }
+            }
+        }
+    }
+return kucuk;
+}
+
+int main()
+{
+    int n,i;
+    printf("Kisi sayisini giriniz:\n");
+    scanf("%d",&n);
+    struct kimlik Kisi[n];
+    for(i=0; i<n; i++){
+        printf("%d. kisinin ismini giriniz:",i+1);
+        scanf("%s", Kisi[i].isim);
+        printf("%d. kisinin dogum tarihini giriniz:\n",i+1);
+        g:
+        printf("Gun:");
+        scanf("%d", &Kisi[i].gun);
+        if(Kisi[i].gun>31 || Kisi[i].gun<=0)
+            goto g;
+        a:
+        printf("Ay:");
+        scanf("%d", &Kisi[i].ay);
+        if(Kisi[i].ay>12 || Kisi[i].ay<=0)
+            goto a;
+        printf("Yil:");
+        scanf("%d", &Kisi[i].yil);
+    }
+    printf("Kisi bilgileri:\n------------------------------------\n");
+    for(i=0; i<n; i++){
+        printf("%s - %d / %d / %d\n", Kisi[i].isim, Kisi[i].gun, Kisi[i].ay, Kisi[i].yil);
+    }
+    i=kucuguBul(Kisi,n);
+    printf("------------------------------------\n");
+    printf("En Kucuk Kisinin ismi: %s\n",Kisi[i].isim);
+    printf("En Kucuk Kisinin Dogum Tarihi: %d / %d / %d\n", Kisi[i].gun, Kisi[i].ay, Kisi[i].yil);
+
+    return 0;
+}
